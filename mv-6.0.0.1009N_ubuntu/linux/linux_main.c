@@ -1453,7 +1453,7 @@ mv_eedp_error_handling(struct scsi_cmnd *scmd, MV_U8 req_status)
 		break;
 	}
 	MV_SetSenseData((PMV_Sense_Data)scmd->sense_buffer, sk, asc, ascq);
-	scmd->result = (DRIVER_SENSE << 24) | (DID_OK << 16);
+	scmd->result = (DID_OK << 16);
 	return;
 }
 #endif
@@ -1515,8 +1515,7 @@ void mv_complete_request(struct hba_extension *phba,
 		scmd->result = (DID_NO_CONNECT << 16);
 		break;
 	case REQ_STATUS_HAS_SENSE:
-		scmd->result  = (DRIVER_SENSE << 24) | (DID_OK << 16) |
-			SAM_STAT_CHECK_CONDITION;
+		scmd->result  = (DID_OK << 16) | SAM_STAT_CHECK_CONDITION;
 
 		if (scmd->cmnd[0]== 0x85 || scmd->cmnd[0]== 0xa1)
 			break;
@@ -1544,7 +1543,7 @@ case REQ_STATUS_DIF_GUARD_ERROR:
 		scmd->result = (DID_TARGET_FAILURE << 16);
 		break;
 	default:
-		scmd->result = DRIVER_INVALID << 24 | DID_ABORT << 16;
+		scmd->result = DID_ERROR << 16;
 		break;
 	}
 	if(scmd && scmd->scsi_done) {
@@ -1616,10 +1615,10 @@ static int scsi_cmd_to_req_conv(struct hba_extension *phba,
 	
 #ifdef USE_OS_TIMEOUT_VALUE
 #if LINUX_VERSION_CODE >KERNEL_VERSION(2, 6, 27)
-	pReq->Time_Out = jiffies_to_msecs(scmd->request->timeout)/1000;
+	pReq->Time_Out = jiffies_to_msecs(scsi_cmd_to_rq(scmd)->timeout)/1000;
 #else
 	#if (LINUX_VERSION_CODE ==KERNEL_VERSION(2, 6, 27) && (IS_OPENSUSE_SLED_SLES))
-		pReq->Time_Out = jiffies_to_msecs(scmd->request->timeout)/1000;
+		pReq->Time_Out = jiffies_to_msecs(scsi_cmd_to_rq(scmd)->timeout)/1000;
 	#else
 		pReq->Time_Out = jiffies_to_msecs(scmd->timeout_per_command)/1000;
 	#endif
@@ -1670,7 +1669,7 @@ static int scsi_cmd_to_req_conv(struct hba_extension *phba,
 
 	pReq->Req_Type      = REQ_TYPE_OS;
 	pReq->Org_Req_Scmd       = scmd;
-	pReq->Tag           = scmd->tag;
+	pReq->Tag           = scsi_cmd_to_rq(scmd)->tag;
 	pReq->Scsi_Status   = REQ_STATUS_PENDING;
 	pReq->Completion    = hba_req_callback;
 	pReq->Cmd_Initiator = phba;
@@ -1706,10 +1705,10 @@ static void hba_ioctl_req_callback(MV_PVOID This, PMV_Request pReq)
 	 */
 	//scmd->request->tag = pReq->Scsi_Status;
 #else
-	scmd->request->rq_status = pReq->Scsi_Status;
+	scsi_cmd_to_rq(scmd)->rq_status = pReq->Scsi_Status;
 #endif
-        scsi_req(scmd->request)->sense = pReq->Sense_Info_Buffer;
-        scsi_req(scmd->request)->sense_len = pReq->Sense_Info_Buffer_Length;
+        scsi_req(scsi_cmd_to_rq(scmd))->sense = pReq->Sense_Info_Buffer;
+        scsi_req(scsi_cmd_to_rq(scmd))->sense_len = pReq->Sense_Info_Buffer_Length;
 	mv_complete_request(phba, scmd, pReq);
 	atomic_dec(&phba->Io_Count);
 #ifdef USE_REQ_POOL
@@ -1748,8 +1747,8 @@ static int scsi_ioctl_cmd_adjust(struct hba_extension *phba,
 bypass:
 #endif
         //pReq->Sense_Info_Buffer = scsi_req(scmd->request)->sense;
-        scsi_req(scmd->request)->result = 0;
-        pReq->Sense_Info_Buffer_Length = scsi_req(scmd->request)->sense_len;
+        scsi_req(scsi_cmd_to_rq(scmd))->result = 0;
+        pReq->Sense_Info_Buffer_Length = scsi_req(scsi_cmd_to_rq(scmd))->sense_len;
 	pReq->Req_Type = REQ_TYPE_INTERNAL;
 	pReq->Org_Req = pReq;
 	pReq->Completion =  hba_ioctl_req_callback;
@@ -2183,7 +2182,7 @@ static int tm_cmd_to_req_conv(struct hba_extension *phba,
     pReq->Time_Out = 30;
 	pReq->Req_Type		= REQ_TYPE_OS;
 	pReq->Org_Req_Scmd	= scmd;
-	pReq->Tag			= scmd->tag;
+	pReq->Tag			= scsi_cmd_to_rq(scmd)->tag;
 	pReq->Scsi_Status	= REQ_STATUS_PENDING;
 	pReq->Completion	= tm_cmd_callback;
 	pReq->Cmd_Initiator = phba;
@@ -2220,8 +2219,8 @@ static int tm_cmd_to_req_conv(struct hba_extension *phba,
 		pReq->Cdb[2] = CDB_HBA_DEVICE_RESET;
 
 #endif
-	    pReq->Cdb[3] = (MV_U8)(scmd->tag&0xff);
-		pReq->Cdb[4] = (MV_U8)(scmd->tag>>8);
+	    pReq->Cdb[3] = (MV_U8)(scsi_cmd_to_rq(scmd)->tag&0xff);
+		pReq->Cdb[4] = (MV_U8)(scsi_cmd_to_rq(scmd)->tag>>8);
 		pReq->Cdb[5] = tm_func;
 		pReq->Cmd_Flag = 0;
 

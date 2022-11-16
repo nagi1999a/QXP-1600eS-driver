@@ -1314,14 +1314,13 @@ static int mv_ial_ht_ata_cmd(struct scsi_device *scsidev, void __user *arg)
                                 sensebuf, &sshdr, (10*HZ), 5, 0, 0, NULL);
 #endif
 
-  
-      	if (driver_byte(cmd_result) == DRIVER_SENSE) {/* sense data available */
+
+      	if (scsi_sense_valid(&sshdr)) {/* sense data available */
          	u8 *desc = sensebuf + 8;
-          	cmd_result &= ~(0xFF<<24); /* DRIVER_SENSE is not an error */
   
           	/* If we set cc then ATA pass-through will cause a
           	* check condition even if no error. Filter that. */
-          	if (cmd_result & SAM_STAT_CHECK_CONDITION) {
+          	if (scsi_status_is_check_condition(cmd_result)) {
               	struct scsi_sense_hdr sshdr;
               	scsi_normalize_sense(sensebuf, SCSI_SENSE_BUFFERSIZE,
                                    &sshdr);
@@ -1430,9 +1429,8 @@ unsigned char excute_taskfile(struct scsi_device *dev,ide_task_request_t *req_ta
                                 sensebuf, (10*HZ), 5, 0);
 #endif
   
-      	if (driver_byte(cmd_result) == DRIVER_SENSE) {/* sense data available */
+      	if (scsi_sense_valid(&sshdr)) {/* sense data available */
          	u8 *desc = sensebuf + 8;
-          	cmd_result &= ~(0xFF<<24); /* DRIVER_SENSE is not an error */
   		
           	/* If we set cc then ATA pass-through will cause a
           	* check condition even if no error. Filter that. */
@@ -1680,7 +1678,7 @@ fetch_data:
 
 #if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,9)
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4,14,0)
-    rq = blk_get_request(q, writing ? REQ_OP_SCSI_OUT : REQ_OP_SCSI_IN, 0);
+    rq = blk_get_request(q, writing ? REQ_OP_DRV_OUT : REQ_OP_DRV_IN, 0);
     if (IS_ERR(rq))
     {
 		hba_mem_free(psptdwb,sizeof(SCSI_PASS_THROUGH_DIRECT_WITH_BUFFER),MV_FALSE);
