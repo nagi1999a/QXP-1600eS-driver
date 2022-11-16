@@ -1434,7 +1434,7 @@ unsigned char excute_taskfile(struct scsi_device *dev,ide_task_request_t *req_ta
   		
           	/* If we set cc then ATA pass-through will cause a
           	* check condition even if no error. Filter that. */
-          	if (cmd_result & SAM_STAT_CHECK_CONDITION) {
+          	if (scsi_status_is_check_condition(cmd_result)) {
               	struct scsi_sense_hdr sshdr;
               	scsi_normalize_sense(sensebuf, SCSI_SENSE_BUFFERSIZE,
                                    &sshdr);
