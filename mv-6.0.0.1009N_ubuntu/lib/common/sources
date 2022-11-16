@@ -1,0 +1,16 @@
+TARGETNAME=common
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=lib
+
+!include ..\..\sources2.inc
+
+SOURCES=		\
+	com_dbg.c	\
+	com_util.c	\
+	com_u64.c	\
+	com_scsi.c	\
+	com_tag.c	\
+	com_sgd.c	\
+	com_nvram.c	\
+	com_roll.c \
+	com_flash.c

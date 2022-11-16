@@ -1,0 +1,15 @@
+TARGETNAME=api
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=lib
+
+!include ..\..\sources2.inc
+
+SOURCES=		\
+	core_api.c      \
+	core_api_exp.c \
+	core_api_test.c \
+	core_api_flash.c \
+	core_api_bbu.c \
+	core_api_led.c \
+	core_api_pd.c
+

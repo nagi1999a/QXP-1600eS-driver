@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">sas_base</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_84E00AF385B9469A844E3A9E62911791 Condition="'$(OVERRIDE_ImportFilePath_84E00AF385B9469A844E3A9E62911791)'!='true'">..\..\sources2.inc.props</ImportFilePath_84E00AF385B9469A844E3A9E62911791>
+    <ImportFilePath_84E00AF385B9469A844E3A9E62911791 Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_84E00AF385B9469A844E3A9E62911791)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_84E00AF385B9469A844E3A9E62911791>
+    <AlternateImportFilePath_7AC10E363C2A47ADBF7C0C430AF48955 Condition="'$(OVERRIDE_AlternateImportFilePath_7AC10E363C2A47ADBF7C0C430AF48955)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_7AC10E363C2A47ADBF7C0C430AF48955>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_84E00AF385B9469A844E3A9E62911791)" Condition="Exists($(ImportFilePath_84E00AF385B9469A844E3A9E62911791))" />
+  <Import Project="$(AlternateImportFilePath_7AC10E363C2A47ADBF7C0C430AF48955)" Condition="!Exists($(ImportFilePath_84E00AF385B9469A844E3A9E62911791))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">sas_handler.c	 	sas_init.c	 	sas_util.c	 	sas_error.c</SOURCES>
+  </PropertyGroup>
+</Project>

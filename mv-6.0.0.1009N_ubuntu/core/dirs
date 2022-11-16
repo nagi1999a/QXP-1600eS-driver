@@ -1,0 +1,9 @@
+DIRS = 	\
+		scsi	\
+		sata_base	\
+		sas_base	\
+		sas_smp	\
+		pm	\
+		pl	\
+		core	\
+		api

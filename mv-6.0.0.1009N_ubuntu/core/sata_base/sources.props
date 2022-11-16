@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">sata_base</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2 Condition="'$(OVERRIDE_ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2)'!='true'">..\..\sources2.inc.props</ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2>
+    <ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2 Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2>
+    <AlternateImportFilePath_5E848BA8E8514D81BBAB1E9F4C733EA6 Condition="'$(OVERRIDE_AlternateImportFilePath_5E848BA8E8514D81BBAB1E9F4C733EA6)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_5E848BA8E8514D81BBAB1E9F4C733EA6>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2)" Condition="Exists($(ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2))" />
+  <Import Project="$(AlternateImportFilePath_5E848BA8E8514D81BBAB1E9F4C733EA6)" Condition="!Exists($(ImportFilePath_D4E47335C09746CDBB66E8037DC4C0B2))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">core_sata.c  	sata_error.c</SOURCES>
+  </PropertyGroup>
+</Project>

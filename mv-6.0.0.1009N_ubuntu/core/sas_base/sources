@@ -1,0 +1,12 @@
+TARGETNAME=sas_base
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=lib
+
+!include ..\..\sources2.inc
+
+SOURCES=		\
+	sas_handler.c	\
+	sas_init.c	\
+	sas_util.c	\
+	sas_error.c
+

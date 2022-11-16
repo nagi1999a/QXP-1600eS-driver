@@ -1,0 +1,9 @@
+TARGETNAME=pm
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=lib
+
+!include ..\..\sources2.inc
+
+SOURCES=		\
+	core_pm.c
+

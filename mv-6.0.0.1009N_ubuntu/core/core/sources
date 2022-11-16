@@ -1,0 +1,20 @@
+TARGETNAME=core
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=lib
+
+!include ..\..\sources2.inc
+
+SOURCES=		\
+	core_manager.c	\
+	core_resource.c	\
+	core_protocol.c	\
+	core_pd_map.c	\
+	core_util.c	\
+	core_xor.c	\
+	core_event.c	\
+	core_error.c	\
+	core_device.c	\
+	core_err_inj.c	\
+	core_large_req.c	\
+	core_alarm.c
+

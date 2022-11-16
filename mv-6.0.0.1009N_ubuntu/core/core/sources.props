@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">core</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A Condition="'$(OVERRIDE_ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A)'!='true'">..\..\sources2.inc.props</ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A>
+    <ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A>
+    <AlternateImportFilePath_39292FF6CBFE41CCBD840C77A1D8D2FD Condition="'$(OVERRIDE_AlternateImportFilePath_39292FF6CBFE41CCBD840C77A1D8D2FD)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_39292FF6CBFE41CCBD840C77A1D8D2FD>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A)" Condition="Exists($(ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A))" />
+  <Import Project="$(AlternateImportFilePath_39292FF6CBFE41CCBD840C77A1D8D2FD)" Condition="!Exists($(ImportFilePath_D62B4CCA49F447A493009FAF17C0FC3A))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">core_manager.c	 	core_resource.c	 	core_protocol.c	 	core_pd_map.c	 	core_util.c	 	core_xor.c	 	core_event.c	 	core_error.c	 	core_device.c	 	core_err_inj.c	 	core_large_req.c	 	core_alarm.c</SOURCES>
+  </PropertyGroup>
+</Project>

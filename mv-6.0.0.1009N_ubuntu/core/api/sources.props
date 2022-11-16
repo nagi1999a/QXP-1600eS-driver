@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">api</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA Condition="'$(OVERRIDE_ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA)'!='true'">..\..\sources2.inc.props</ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA>
+    <ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA>
+    <AlternateImportFilePath_C255222DE45E44F4B8282A4549149849 Condition="'$(OVERRIDE_AlternateImportFilePath_C255222DE45E44F4B8282A4549149849)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_C255222DE45E44F4B8282A4549149849>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA)" Condition="Exists($(ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA))" />
+  <Import Project="$(AlternateImportFilePath_C255222DE45E44F4B8282A4549149849)" Condition="!Exists($(ImportFilePath_E4DF4C2357DC485B8FF712657A0EDECA))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">core_api.c       	core_api_exp.c  	core_api_test.c  	core_api_flash.c  	core_api_bbu.c  	core_api_led.c  	core_api_pd.c</SOURCES>
+  </PropertyGroup>
+</Project>

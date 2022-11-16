@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">common</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86 Condition="'$(OVERRIDE_ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86)'!='true'">..\..\sources2.inc.props</ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86>
+    <ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86 Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86>
+    <AlternateImportFilePath_F38EB5F332004FC5870346653205A4B5 Condition="'$(OVERRIDE_AlternateImportFilePath_F38EB5F332004FC5870346653205A4B5)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_F38EB5F332004FC5870346653205A4B5>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86)" Condition="Exists($(ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86))" />
+  <Import Project="$(AlternateImportFilePath_F38EB5F332004FC5870346653205A4B5)" Condition="!Exists($(ImportFilePath_07DC0DD3D9A4453EB65A86F492500A86))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">com_dbg.c	 	com_util.c	 	com_u64.c	 	com_scsi.c	 	com_tag.c	 	com_sgd.c	 	com_nvram.c	 	com_roll.c  	com_flash.c</SOURCES>
+  </PropertyGroup>
+</Project>

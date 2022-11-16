@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">pm</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814 Condition="'$(OVERRIDE_ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814)'!='true'">..\..\sources2.inc.props</ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814>
+    <ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814 Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814>
+    <AlternateImportFilePath_E7FFCD2E138D4AC185F0B7F5EB9B6CE1 Condition="'$(OVERRIDE_AlternateImportFilePath_E7FFCD2E138D4AC185F0B7F5EB9B6CE1)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_E7FFCD2E138D4AC185F0B7F5EB9B6CE1>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814)" Condition="Exists($(ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814))" />
+  <Import Project="$(AlternateImportFilePath_E7FFCD2E138D4AC185F0B7F5EB9B6CE1)" Condition="!Exists($(ImportFilePath_2EC4088CA87F4794BB0F2F2B1F789814))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">core_pm.c</SOURCES>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TARGETNAME Condition="'$(OVERRIDE_TARGETNAME)'!='true'">sas_smp</TARGETNAME>
+    <TARGETTYPE Condition="'$(OVERRIDE_TARGETTYPE)'!='true'">DRIVER_LIBRARY</TARGETTYPE>
+    <TARGETPATH Condition="'$(OVERRIDE_TARGETPATH)'!='true'">lib</TARGETPATH>
+    <ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C Condition="'$(OVERRIDE_ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C)'!='true'">..\..\sources2.inc.props</ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C>
+    <ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C Condition="(!$([System.IO.Path]::IsPathRooted('..\..\sources2.inc.props'))) And ('$(OVERRIDE_ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C)'!='true')">$([System.IO.Path]::Combine($(MSBuildProjectDirectory),'..\..\sources2.inc.props'))</ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C>
+    <AlternateImportFilePath_78F855CA42F8425488F393FD17715A4E Condition="'$(OVERRIDE_AlternateImportFilePath_78F855CA42F8425488F393FD17715A4E)'!='true'">$([System.IO.Path]::Combine($(MSBuildThisFileDirectory),'..\..\sources2.inc.props'))</AlternateImportFilePath_78F855CA42F8425488F393FD17715A4E>
+  </PropertyGroup>
+  <Import Project="$(ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C)" Condition="Exists($(ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C))" />
+  <Import Project="$(AlternateImportFilePath_78F855CA42F8425488F393FD17715A4E)" Condition="!Exists($(ImportFilePath_A2FD2F714E8D4D61B2F11F539959DD8C))" />
+  <PropertyGroup>
+    <SOURCES Condition="'$(OVERRIDE_SOURCES)'!='true'">core_expander.c</SOURCES>
+  </PropertyGroup>
+</Project>

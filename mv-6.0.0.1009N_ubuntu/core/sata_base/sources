@@ -1,0 +1,10 @@
+TARGETNAME=sata_base
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=lib
+
+!include ..\..\sources2.inc
+
+SOURCES=		\
+	core_sata.c \
+	sata_error.c
+	
